@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+$sizes: 10, 25, 33, 50, 66, 75, 90, 100;
+
+$bp-xsmall: 0px;
+$bp-small: 600px;
+$bp-med: 800px;
+$bp-large: 1024px;
+$bp-xlarge: 1280px;
+
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+@mixin clearfix($contenido:"") {
+    content: $contenido;
+    display: table;
+    clear: both;
+}
+
+@function getWidth($width) {
+    $perc: $width * 1%;
+    @return $perc;
+}
+
+@mixin breakpoint($width, $classname) {
+    @media screen and (min-width: $width) {
+        @each $size in $sizes {
+            > .#{$classname}-#{$size} { width: getWidth($size); }
+        }
+        
+
+        > div.not-in-#{$classname} { display: none; }
+        > div.in-#{$classname} { display: inherit; }
+    }
+}
+
+.grid {
+    width: 100%;
+    margin-bottom: 20px;
+
+    & > div {
+        width: 100%;
+        float: left;
+        box-sizing: border-box;
+    }
+    
+    &:after {
+        @include clearfix();
+    }
+
+    @include breakpoint($bp-xsmall,'xs');
+    @include breakpoint($bp-small,'sm');
+    @include breakpoint($bp-med,'md');
+    @include breakpoint($bp-large,'lg');
+    @include breakpoint($bp-xlarge,'xl');
+}
+

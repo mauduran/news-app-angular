@@ -1,4 +1,8 @@
-<!--ng generate component news-->
-<h1>Bienvenido {{title}}</h1>
-<h2>App Component</h2>
-<router-outlet></router-outlet>
+<div class="root">
+    <h1>News App</h1>
+    <nav>
+        <a routerLink="/noticias">Noticias</a>
+        <a routerLink="/titulares">Titulares</a>
+    </nav>
+    <router-outlet></router-outlet>
+</div>
