@@ -1,23 +1,28 @@
 <h2>{{name}}</h2>
 
-<h3>Source:</h3>
+<div class='news-options'>
+    <h3>Source:</h3>
+    <select [(ngModel)]="selectedSource">
+        <option value=""></option>
+        <option *ngFor="let source of sources" value={{source.id}}>{{source.name}}</option>
+    </select>
+    
+    <h3>Search query</h3>
+    <input [(ngModel)]="searchQuery">
+    
+    <button (click)="(onSubmit())">Search</button>
+</div>
 
-<select [(ngModel)]="selectedSource">
-    <option *ngFor="let source of sources" value={{source.id}}>{{source.name}}</option>
-</select>
 
-<h3>Search query</h3>
-<input [(ngModel)]="searchQuery">
-
-<button (click)="(onSubmit())">Search</button>
-
-
-<ul>
-    <li *ngFor="let item of news">
-        <a routerLink="{{item.id}}"><!--.url-->
-            <img *ngIf="item.image" src="{{item.image}}" alt="news image">
-            {{item.title}}
-        </a>
-    </li>
-</ul>
+<div class="news-container grid" >
+    <div *ngFor="let item of news" class="sm-50 md-25">
+            <a href="{{url}}">
+              <img *ngIf="item.urlToImage" src="{{item.urlToImage}}" alt="">
+              <img *ngIf="!item.urlToImage" src="https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg" alt="">
+              {{item.title}}
+              <p>{{item.source.name}}</p>
+              <p>{{item.publishedAt}}</p>
+            </a>
+    </div>
+</div>
 
