@@ -10,14 +10,14 @@ export class NewsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getNews(q, source = null): Promise<any> {
+  getNews(q:string, source:string = null): Promise<any> {
     let sourceQuery = '';
     if (source) sourceQuery = '&sources=' + source;
     return this.httpClient.get(`http://localhost:3000/api/news?q=${q}${sourceQuery}`).toPromise();
   }
 
-  getHeadlines(): Promise<any> {
-    return this.httpClient.get('http://localhost:3000/api/top-headlines').toPromise();
+  getHeadlines(country:string = 'mx'): Promise<any> {
+    return this.httpClient.get(`http://localhost:3000/api/top-headlines?pais=${country}`).toPromise();
   }
 
   getSources(): Promise<any> {
