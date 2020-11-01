@@ -1,4 +1,17 @@
 <h2>{{name}}</h2>
+
+<h3>Source:</h3>
+
+<select [(ngModel)]="selectedSource">
+    <option *ngFor="let source of sources" value={{source.id}}>{{source.name}}</option>
+</select>
+
+<h3>Search query</h3>
+<input [(ngModel)]="searchQuery">
+
+<button (click)="(onSubmit())">Search</button>
+
+
 <ul>
     <li *ngFor="let item of news">
         <a routerLink="{{item.id}}"><!--.url-->
@@ -7,3 +20,4 @@
         </a>
     </li>
 </ul>
+
